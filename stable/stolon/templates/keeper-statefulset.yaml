@@ -45,7 +45,7 @@ spec:
               # Generate our keeper uid using the pod index
               IFS='-' read -ra ADDR <<< "$(hostname)"
               export STKEEPER_UID="{{ .Values.keeper.uid_prefix }}${ADDR[-1]}"
-              export POD_IP=$(hostname -i)
+              export POD_IP=$(hostname -i | awk '{print $1}')
               export STKEEPER_PG_LISTEN_ADDRESS=$POD_IP
               export STOLON_DATA=/stolon-data
               chown stolon:stolon $STOLON_DATA
